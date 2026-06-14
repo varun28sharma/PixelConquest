@@ -57,7 +57,7 @@ function getStoredUser() {
   try {
     const raw = localStorage.getItem('pixel_user');
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { }
   return { id: 'guest', username: 'Guest', color: '#a855f7' };
 }
 const storedUser = getStoredUser();
@@ -91,9 +91,9 @@ export const usePixelStore = create<PixelStore>((set, get) => ({
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId: u.id, color }),
-          }).catch(() => {});
+          }).catch(() => { });
         }
-      } catch {}
+      } catch { }
     }
     set({ userColor: color });
   },
@@ -102,7 +102,7 @@ export const usePixelStore = create<PixelStore>((set, get) => ({
     if (get().socket) return;
 
     // Connect to backend server
-    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://pixelconquest-backend.onrender.com';
+    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://pixelconquest.onrender.com';
     const socket = io(BACKEND_URL);
 
     socket.on('connect', () => console.log('Connected to server via WebSocket'));

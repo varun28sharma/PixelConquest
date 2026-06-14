@@ -86,7 +86,7 @@ export const usePixelStore = create<PixelStore>((set, get) => ({
           u.color = color;
           localStorage.setItem('pixel_user', JSON.stringify(u));
           // Also sync to backend
-          fetch('http://localhost:3001/api/auth/color', {
+          fetch('https://pixelconquest-backend.onrender.com/api/auth/color', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId: u.id, color }),

@@ -327,7 +327,8 @@ export default function MapWorkspace() {
     }
     setResizing(true);
     try {
-      const res = await fetch('http://localhost:3001/api/grid/resize', {
+      const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+      const res = await fetch(`${BACKEND_URL}/api/grid/resize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ gridSize: size }),

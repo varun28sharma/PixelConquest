@@ -86,7 +86,8 @@ export const usePixelStore = create<PixelStore>((set, get) => ({
           u.color = color;
           localStorage.setItem('pixel_user', JSON.stringify(u));
           // Also sync to backend
-          fetch('https://pixelconquest-backend.onrender.com/api/auth/color', {
+          const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+          fetch(`${BACKEND_URL}/api/auth/color`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId: u.id, color }),
@@ -101,7 +102,8 @@ export const usePixelStore = create<PixelStore>((set, get) => ({
     if (get().socket) return;
 
     // Connect to backend server
-   const socket = io('https://pixelconquest-backend.onrender.com');
+    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+    const socket = io(BACKEND_URL);
 
     socket.on('connect', () => console.log('Connected to server via WebSocket'));
 

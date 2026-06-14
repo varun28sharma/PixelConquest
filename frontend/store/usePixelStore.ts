@@ -102,7 +102,7 @@ export const usePixelStore = create<PixelStore>((set, get) => ({
     if (get().socket) return;
 
     // Connect to backend server
-    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://pixelconquest-backend.onrender.com';
     const socket = io(BACKEND_URL);
 
     socket.on('connect', () => console.log('Connected to server via WebSocket'));
